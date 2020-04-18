@@ -23,9 +23,9 @@ export class TodoGrid extends Component<{}, IState> {
 
     private renderTodos = () => this.state.todos.map(todo => <Todo title={todo.title} isCompleted={todo.isCompleted} />);
     
-    render() {
+    render() {  
         return (
-            <div className="container w-75 my-5 todo-list">
+            <div className="container my-5 todo-list">
                 {this.renderTodos()}
             </div>
         )

@@ -84,5 +84,13 @@ opacity: 0;
 
 *{
   overflow-y: auto !important;
-  overflow-x: hidden !important;
+  overflow-x: auto !important;
+}
+
+
+
+@media screen and (min-width: 420px) {
+    .responsive-container {
+    width: 600px !important;
+  }
 }
