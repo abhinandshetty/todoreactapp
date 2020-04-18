@@ -16,7 +16,7 @@ export class Todo extends Component<ITodo,ITodo> {
 
     render() {
         return (
-            <div className={`row bg-warning my-3 mx-2 py-3 px-4 todo  ${this.state.isCompleted ? "completed-todo" : ""}`}>
+            <div className={`row todo-med my-3 mx-2 py-3 px-4 todo  ${this.state.isCompleted ? "completed-todo" : ""}`}>
                 <div className={`col-10`}>
                     {this.props.title}
                 </div>

@@ -41,6 +41,19 @@ input[type=checkbox]:checked:after {
   left: 22px;
 }
 
+.todo-high {
+  background-color: #ce4b4b;
+}
+
+.todo-med {
+  background-color: #cea04b;
+}
+
+.todo-low {
+  background-color: #4b98ce;
+}
+
+
 .completed-todo {
   text-decoration: line-through;
   font-style: italic;
