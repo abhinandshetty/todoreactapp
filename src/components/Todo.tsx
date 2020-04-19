@@ -1,29 +1,17 @@
 import React, { Component } from 'react'
 import { ITodo } from '../interfaces/ITodo'
 
-export class Todo extends Component<ITodo,ITodo> {
-    state = {
-        title: '',
-        isCompleted : false
-    }
-    
-    componentDidMount() : void {
-        this.setState({title: this.props.title, isCompleted: this.props.isCompleted});
-    }
-
-    private onChangeCheckBox = () : void => {
-        this.setState({isCompleted : !this.state.isCompleted})
-    }
-
+export class Todo extends Component<{todo: ITodo, onChangeTodoStatus: (todo: ITodo, status: boolean)=>void}, {}> {
     render() {
+        const {todo, onChangeTodoStatus } = this.props;
         return (
-            <div className={`row todo-low my-3 mx-2 py-3 px-4 todo  ${this.state.isCompleted ? "completed-todo" : ""}`}>
+            <div className={`row todo-low my-3 mx-2 py-3 px-4 todo  ${todo.isCompleted ? "completed-todo" : ""}`}>
                 <div className={`col-10`}>
-                    {this.state.title}
+                    {todo.title}
                 </div>
 
                 <div className="col-2">
-                    <input type="checkbox" onClick={this.onChangeCheckBox} className="custom-checkbox grid-cb mt-1" checked={this.state.isCompleted}/>
+                    <input type="checkbox" onChange={(event: React.SyntheticEvent<HTMLInputElement>)=> onChangeTodoStatus(todo, event.currentTarget.checked)} className="custom-checkbox grid-cb mt-1" checked={todo.isCompleted}/>
                 </div>
             </div>
         )

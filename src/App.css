@@ -112,6 +112,7 @@ opacity: 0;
 
 .todo-list {
   max-height: 450px;
+  min-height: 300px;
 }
 
 *{

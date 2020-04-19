@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
-import TodoGrid from './components/TodoGrid';
 import AddTodo from './components/AddTodo';
+import { ITodo } from './interfaces/ITodo';
+import Todo from './components/Todo';
 
 
 function BaseContainer() {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState<boolean>(false);
+  const [todos, setTodos] = useState<ITodo[]>([]);
 
-  const toggleModal = () => setOpen(!isOpen);
+
+  const toggleModal = () : void => setOpen(!isOpen);
+
+  const onAddTodo = (todo: ITodo, callback = () => {}): void => {
+    todos.unshift(todo);
+    sortTodos(todos);
+    callback();
+  }
+
+  const changeTodoStatus = (todo: ITodo, isCompleted: boolean): void => {
+    todos.unshift({...(todos.splice(todos.indexOf(todo),1)[0]),isCompleted});
+    sortTodos(todos);
+  }
+
+  const sortTodos = (todos: ITodo[]) => setTodos(() => ([...(todos.filter(e=>!e.isCompleted)), ...(todos.filter(e=>e.isCompleted))]));
+
+
+  const renderTodos = (): JSX.Element[] => todos.map((todo, index) => <Todo key={index} todo={todo} onChangeTodoStatus={changeTodoStatus} />);
 
   return (
     <>
@@ -15,10 +34,12 @@ function BaseContainer() {
       </div>
       <div className="container m-auto base-conatainer responsive-container">
         <div className="row">
-          <TodoGrid />
+          <div className="container my-5 todo-list">
+            {todos.length ?  renderTodos() : <h5 style={{height: "100px", color: 'darkgray'}} className="mx-5">Click on Add Todo and get started!</h5>}
+          </div>
         </div>
       </div>
-      <AddTodo isOpen={isOpen} onHide={toggleModal} />
+      <AddTodo isOpen={isOpen} onHide={toggleModal} onAddTodo={onAddTodo} />
     </>
   );
 }

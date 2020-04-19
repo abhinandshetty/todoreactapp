@@ -4,19 +4,23 @@ import { ITodo } from '../interfaces/ITodo';
 
 interface IAddTodoProps {
     isOpen: boolean,
-    onHide: () => void
+    onHide: () => void,
+    onAddTodo: (todo : ITodo, callback: ()=>void) => void
 }
 
 export class AddTodo extends Component<IAddTodoProps, ITodo> {
 
     state = {
+        id: null,
         title: '',
         isCompleted: false
     }
 
     private onAddTodo = (event: React.SyntheticEvent) => {
         event.preventDefault();
-        this.setState({title: '', isCompleted: false}, () => this.props.onHide());
+        this.setState({...this.state, id: Date.now()},()=> this.props.onAddTodo(this.state, () =>{
+            this.setState({title: '', isCompleted: false}, () => this.props.onHide());
+        }));
     }
 
     private onChangeField = (event: React.SyntheticEvent<HTMLInputElement>) => {
@@ -38,7 +42,7 @@ export class AddTodo extends Component<IAddTodoProps, ITodo> {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form className="container m-1" onSubmit={this.onAddTodo}>
+                    <form className="container m-1" onSubmit={this.onAddTodo} autoComplete="off">
                         <div className="row form-group">
                             <label htmlFor="title">Title</label>
                             <input type="text" id="title" name="title" className="form-control input" value={this.state.title} onChange={this.onChangeField} placeholder="Title"/>
