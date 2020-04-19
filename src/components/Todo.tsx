@@ -16,13 +16,13 @@ export class Todo extends Component<ITodo,ITodo> {
 
     render() {
         return (
-            <div className={`row todo-med my-3 mx-2 py-3 px-4 todo  ${this.state.isCompleted ? "completed-todo" : ""}`}>
+            <div className={`row todo-low my-3 mx-2 py-3 px-4 todo  ${this.state.isCompleted ? "completed-todo" : ""}`}>
                 <div className={`col-10`}>
                     {this.props.title}
                 </div>
 
                 <div className="col-2">
-                    <input type="checkbox" onClick={this.onChangeCheckBox} className="custom-checkbox mt-1" checked={this.state.isCompleted}/>
+                    <input type="checkbox" onClick={this.onChangeCheckBox} className="custom-checkbox grid-cb mt-1" checked={this.state.isCompleted}/>
                 </div>
             </div>
         )
