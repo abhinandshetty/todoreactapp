@@ -18,9 +18,12 @@ export class AddTodo extends Component<IAddTodoProps, ITodo> {
 
     private onAddTodo = (event: React.SyntheticEvent) => {
         event.preventDefault();
-        this.setState({...this.state, id: Date.now()},()=> this.props.onAddTodo(this.state, () =>{
-            this.setState({title: '', isCompleted: false}, () => this.props.onHide());
-        }));
+        if(this.state.title) {
+            this.setState({...this.state, id: Date.now()},()=> this.props.onAddTodo(this.state, () =>{
+                this.setState({title: '', isCompleted: false}, () => this.props.onHide());
+            }));
+        }
+        
     }
 
     private onChangeField = (event: React.SyntheticEvent<HTMLInputElement>) => {

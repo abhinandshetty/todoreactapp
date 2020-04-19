@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import AddTodo from './components/AddTodo';
 import { ITodo } from './interfaces/ITodo';
 import Todo from './components/Todo';
@@ -8,6 +8,13 @@ function BaseContainer() {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [todos, setTodos] = useState<ITodo[]>([]);
 
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+
+  useEffect(() => {
+    console.log(buttonRef);
+    document.activeElement && (document.activeElement as HTMLElement).blur()
+    },[isOpen, todos]);
 
   const toggleModal = () : void => setOpen(!isOpen);
 
@@ -30,7 +37,7 @@ function BaseContainer() {
   return (
     <>
       <div className="container m-auto responsive-container">
-        <button className="add-btn mt-5 mb-3" onClick={toggleModal}>Add Todo</button>
+        <button className="add-btn mt-5 mb-3" onClick={toggleModal} ref={buttonRef}>Add Todo</button>
       </div>
       <div className="container m-auto base-conatainer responsive-container">
         <div className="row">
