@@ -4,7 +4,7 @@ import { ITodo } from '../interfaces/ITodo';
 
 interface IAddTodoProps {
     isOpen: boolean,
-    onHide: any
+    onHide: () => void
 }
 
 export class AddTodo extends Component<IAddTodoProps, ITodo> {

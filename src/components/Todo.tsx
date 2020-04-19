@@ -3,11 +3,12 @@ import { ITodo } from '../interfaces/ITodo'
 
 export class Todo extends Component<ITodo,ITodo> {
     state = {
+        title: '',
         isCompleted : false
     }
     
     componentDidMount() : void {
-        this.setState({isCompleted: this.props.isCompleted});
+        this.setState({title: this.props.title, isCompleted: this.props.isCompleted});
     }
 
     private onChangeCheckBox = () : void => {
@@ -18,7 +19,7 @@ export class Todo extends Component<ITodo,ITodo> {
         return (
             <div className={`row todo-low my-3 mx-2 py-3 px-4 todo  ${this.state.isCompleted ? "completed-todo" : ""}`}>
                 <div className={`col-10`}>
-                    {this.props.title}
+                    {this.state.title}
                 </div>
 
                 <div className="col-2">

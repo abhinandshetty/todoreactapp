@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import TodoForm from './components/TodoForm';
 import TodoGrid from './components/TodoGrid';
 import AddTodo from './components/AddTodo';
 
 
 function BaseContainer() {
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(false);
 
   const toggleModal = () => setOpen(!isOpen);
 
@@ -16,11 +15,10 @@ function BaseContainer() {
       </div>
       <div className="container m-auto base-conatainer responsive-container">
         <div className="row">
-        <TodoGrid />
-
+          <TodoGrid />
         </div>
       </div>
-      <AddTodo isOpen={isOpen} onHide={toggleModal}/>
+      <AddTodo isOpen={isOpen} onHide={toggleModal} />
     </>
   );
 }
